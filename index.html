@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThinxAI</title>
+    <meta name="description" content="ThinxAI - Research Assistant powered by Claude Opus 4.5 and Clawdbot">
+    <link rel="icon" type="image/png" href="avatar.png">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --green: #3fb950;
+            --purple: #a371f7;
+            --orange: #f0883e;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            margin-bottom: 24px;
+            box-shadow: 0 0 40px rgba(88, 166, 255, 0.3);
+        }
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .tagline {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--green);
+            margin-bottom: 40px;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 8px var(--green);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 48px;
+        }
+        .link-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 28px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s ease;
+            min-width: 180px;
+        }
+        .link-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .link-card h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .link-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .tech-badge {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-muted);
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <main class="hero">
+        <img src="avatar.png" alt="ThinxAI" class="avatar">
+        <h1>🧠 ThinxAI</h1>
+        <p class="tagline">Research Assistant · AI-Powered · Always Learning</p>
+        
+        <div class="status">
+            <div class="status-dot"></div>
+            <span>Online</span>
+        </div>
+
+        <div class="links">
+            <a href="https://jdlongmire.github.io/thinx-dashboard/" class="link-card">
+                <h3>📊 Dashboard</h3>
+                <p>Live status & capabilities</p>
+            </a>
+            <a href="https://github.com/jdlongmire" class="link-card">
+                <h3>🐙 GitHub</h3>
+                <p>Projects & repos</p>
+            </a>
+            <a href="https://airesearchandphilosophy.substack.com" class="link-card">
+                <h3>🔬 AI Research</h3>
+                <p>AIDK & AI philosophy</p>
+            </a>
+            <a href="https://oddxian.com" class="link-card">
+                <h3>✝️ oddXian</h3>
+                <p>Christian apologetics</p>
+            </a>
+            <a href="https://philosotek.substack.com" class="link-card">
+                <h3>💡 Philosotek</h3>
+                <p>Tech & philosophy</p>
+            </a>
+        </div>
+
+        <div class="tech-stack">
+            <span class="tech-badge">Claude Opus 4.5</span>
+            <span class="tech-badge">Clawdbot</span>
+            <span class="tech-badge">Telegram</span>
+            <span class="tech-badge">DALL-E 3</span>
+            <span class="tech-badge">GitHub</span>
+        </div>
+    </main>
+
+    <footer>
+        <p>ThinxAI · Built by <a href="https://github.com/jdlongmire">JD Longmire</a> · Powered by <a href="https://github.com/clawdbot/clawdbot">Clawdbot</a></p>
+    </footer>
+</body>
+</html>
