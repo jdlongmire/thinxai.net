@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThinxAI Dashboard</title>
+    <title>ThinxAI - Research Gateway</title>
     <style>
         :root {
             --bg: #0d1117;
@@ -17,6 +17,7 @@
             --red: #f85149;
             --purple: #a371f7;
             --orange: #f0883e;
+            --gold: #d4a84b;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -26,71 +27,140 @@
             padding: 20px;
             min-height: 100vh;
         }
-        .container { max-width: 1400px; margin: 0 auto; }
+        .container { max-width: 1200px; margin: 0 auto; }
         header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
+            text-align: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
             border-bottom: 1px solid var(--border);
         }
         .avatar {
-            width: 64px;
-            height: 64px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent);
+            border: 3px solid var(--accent);
+            margin-bottom: 16px;
         }
-        h1 { font-size: 28px; font-weight: 600; }
-        .subtitle { color: var(--text-muted); font-size: 14px; }
+        h1 { font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+        .tagline { color: var(--text-muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
         .section-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
-            margin: 32px 0 16px 0;
+            margin: 40px 0 16px 0;
             padding-bottom: 8px;
             border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-        .grid-4 {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        }
+        .grid { display: grid; gap: 16px; margin-bottom: 24px; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        /* Cards */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 20px;
+            padding: 24px;
             transition: border-color 0.2s, transform 0.2s;
         }
+        a.card { text-decoration: none; color: inherit; display: block; }
         a.card:hover {
             border-color: var(--accent);
             transform: translateY(-2px);
         }
         .card h2 {
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+        }
+        .card h3 { font-size: 20px; margin-bottom: 8px; }
+        .card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+        /* Hero Card - oddXian */
+        .hero-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1a1f2e 100%);
+            border: 2px solid var(--gold);
+            padding: 32px;
+            text-align: center;
+        }
+        .hero-card:hover { border-color: var(--accent); }
+        .hero-card .icon { font-size: 48px; margin-bottom: 16px; }
+        .hero-card h3 { font-size: 28px; color: var(--gold); margin-bottom: 12px; }
+        .hero-card .subtitle { font-size: 16px; color: var(--text); margin-bottom: 16px; }
+        .hero-card .links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .hero-card .links a {
+            color: var(--accent);
+            font-size: 14px;
+            padding: 8px 16px;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .hero-card .links a:hover {
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        /* Domain Cards */
+        .domain-card { text-align: center; }
+        .domain-card .icon { font-size: 36px; margin-bottom: 12px; }
+        .domain-card h3 { font-size: 18px; margin-bottom: 6px; }
+
+        /* Capability Items */
+        .capability {
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .capability:last-child { border-bottom: none; }
+        .capability-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: var(--border);
+            flex-shrink: 0;
+        }
+        .capability-info h4 { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+        .capability-info p { font-size: 12px; color: var(--text-muted); }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            margin-left: 8px;
+            background: rgba(63,185,80,0.2);
+            color: var(--green);
+        }
+        .tag.dev { background: rgba(210,153,34,0.2); color: var(--yellow); }
+
+        /* Status Section */
+        .status-bar {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            padding: 16px 20px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 13px;
         }
         .status-item {
             display: flex;
@@ -98,340 +168,190 @@
             gap: 8px;
         }
         .status-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
         }
-        .status-dot.green { background: var(--green); box-shadow: 0 0 8px var(--green); }
-        .status-dot.yellow { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
-        .status-dot.red { background: var(--red); box-shadow: 0 0 8px var(--red); }
-        .status-dot.gray { background: var(--text-muted); }
-        .status-label { font-size: 13px; }
-        ul { list-style: none; }
-        li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
-        }
-        li:last-child { border-bottom: none; }
-        .check { color: var(--green); }
-        .pending { color: var(--yellow); }
-        .tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            margin-left: 8px;
-        }
-        .tag.done { background: rgba(63,185,80,0.2); color: var(--green); }
-        .tag.progress { background: rgba(210,153,34,0.2); color: var(--yellow); }
-        .tag.next { background: rgba(88,166,255,0.2); color: var(--accent); }
-        .tag.active { background: rgba(63,185,80,0.2); color: var(--green); }
-        .tag.pending { background: rgba(210,153,34,0.2); color: var(--yellow); }
-        .capability {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .capability:last-child { border-bottom: none; }
-        .capability-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            background: var(--border);
-        }
-        .capability-info h3 { font-size: 14px; font-weight: 500; }
-        .capability-info p { font-size: 12px; color: var(--text-muted); }
-        .metric-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .metric-value {
-            font-size: 36px;
-            font-weight: 700;
+        .status-dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+        .status-dot.yellow { background: var(--yellow); }
+        .status-dot.red { background: var(--red); }
+        .metric {
             color: var(--accent);
+            font-weight: 600;
         }
-        .metric-label {
-            font-size: 12px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 4px;
-        }
-        .ops-metric {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .ops-metric:last-child { border-bottom: none; }
-        .ops-label { font-size: 14px; color: var(--text-muted); }
-        .ops-value { font-size: 16px; font-weight: 600; }
-        .ops-value.green { color: var(--green); }
-        .ops-value.yellow { color: var(--yellow); }
-        .ops-value.accent { color: var(--accent); }
-        .activity-item {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 13px;
-        }
-        .activity-item:last-child { border-bottom: none; }
-        .activity-icon { margin-right: 8px; }
+        .updated { color: var(--text-muted); margin-left: auto; }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding-top: 24px;
+            padding-top: 32px;
             color: var(--text-muted);
             font-size: 12px;
         }
         footer a { color: var(--accent); text-decoration: none; }
-        .updated { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
-        .loading { opacity: 0.5; }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .pulse { animation: pulse 2s infinite; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <img src="avatar.png" alt="ThinxAI" class="avatar">
-            <div>
-                <h1>ThinxAI</h1>
-                <div class="subtitle">Research Assistant · Claude Code CLI · Claude Opus 4.5</div>
-            </div>
+            <h1>ThinxAI</h1>
+            <p class="tagline">AI-powered research assistant exploring the intersection of faith, logic, and technology</p>
         </header>
 
-        <!-- METRICS -->
-        <div class="grid grid-4" id="metrics">
-            <div class="metric-card">
-                <div class="metric-value" id="commits-today">--</div>
-                <div class="metric-label">Commits Today</div>
+        <!-- ============================================ -->
+        <!-- SECTION 1: RESEARCH GATEWAY                  -->
+        <!-- ============================================ -->
+
+        <!-- oddXian - Primary Research Focus -->
+        <a href="https://oddxian.com" class="card hero-card">
+            <div class="icon">✝️</div>
+            <h3>oddXian Apologetics</h3>
+            <p class="subtitle">Rigorous Christian apologetics — Challenge the consensus</p>
+            <p>Working out the harmony of God's Word and God's World through logical argumentation and scriptural fidelity</p>
+            <div class="links">
+                <a href="https://oddxian.com">Substack</a>
+                <a href="https://github.com/jdlongmire/oddxian-apologetics/wiki">Research Wiki</a>
+                <a href="https://github.com/jdlongmire/oddxian-apologetics">GitHub</a>
             </div>
-            <div class="metric-card">
-                <div class="metric-value" id="telegram-messages">--</div>
-                <div class="metric-label">Telegram Messages</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value" id="emails-sent">--</div>
-                <div class="metric-label">Emails Sent</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value" id="uptime-hours">--</div>
-                <div class="metric-label">Uptime (Hours)</div>
-            </div>
+        </a>
+
+        <!-- Other Research Domains -->
+        <div class="section-title">Related Research</div>
+        <div class="grid grid-3">
+            <a href="https://airesearchandphilosophy.substack.com" class="card domain-card">
+                <div class="icon">🤖</div>
+                <h3>AI Research</h3>
+                <p>AIDK Framework — Why AI can't originate, only derive</p>
+            </a>
+            <a href="https://github.com/jdlongmire/logic-realism-theory" class="card domain-card">
+                <div class="icon">🔬</div>
+                <h3>Logic Realism</h3>
+                <p>L3 Theory — Logic as ontological constraint</p>
+            </a>
+            <a href="https://github.com/jdlongmire/thinx" class="card domain-card">
+                <div class="icon">🧠</div>
+                <h3>ThinxAI Platform</h3>
+                <p>Infrastructure, automation, and integrations</p>
+            </a>
         </div>
 
-        <!-- STATUS & CAPABILITIES -->
-        <div class="grid">
+        <!-- ============================================ -->
+        <!-- SECTION 2: CAPABILITIES & DEVELOPMENT        -->
+        <!-- ============================================ -->
+        <div class="section-title">ThinxAI Capabilities</div>
+        <div class="grid grid-2">
             <div class="card">
-                <h2>System Status</h2>
-                <div class="status-grid" id="status-grid">
-                    <!-- Dynamically populated -->
-                </div>
-                <div class="updated" id="last-updated">Loading...</div>
-            </div>
-
-            <div class="card">
-                <h2>Capabilities</h2>
+                <h2>Active Features</h2>
                 <div class="capability">
                     <div class="capability-icon">💬</div>
                     <div class="capability-info">
-                        <h3>Telegram Bridge</h3>
+                        <h4>Telegram Bridge <span class="tag">Live</span></h4>
                         <p>Natural language routing to Claude CLI</p>
                     </div>
                 </div>
                 <div class="capability">
                     <div class="capability-icon">📧</div>
                     <div class="capability-info">
-                        <h3>Email Integration</h3>
+                        <h4>Email Integration <span class="tag">Live</span></h4>
                         <p>Gmail via SMTP/IMAP with NLP commands</p>
                     </div>
                 </div>
                 <div class="capability">
                     <div class="capability-icon">🖼️</div>
                     <div class="capability-info">
-                        <h3>Image Display</h3>
+                        <h4>Image Display <span class="tag">Live</span></h4>
                         <p>View images directly in Telegram</p>
-                    </div>
-                </div>
-                <div class="capability">
-                    <div class="capability-icon">🔐</div>
-                    <div class="capability-info">
-                        <h3>Permission Flow</h3>
-                        <p>Confirmation for risky commands</p>
                     </div>
                 </div>
                 <div class="capability">
                     <div class="capability-icon">🧠</div>
                     <div class="capability-info">
-                        <h3>Shared Memory</h3>
-                        <p>MEMORY.md context across interfaces</p>
+                        <h4>Shared Memory <span class="tag">Live</span></h4>
+                        <p>MEMORY.md context across all interfaces</p>
                     </div>
                 </div>
                 <div class="capability">
                     <div class="capability-icon">🐙</div>
                     <div class="capability-info">
-                        <h3>GitHub CLI</h3>
-                        <p>Full repo access via gh</p>
+                        <h4>GitHub CLI <span class="tag">Live</span></h4>
+                        <p>Full repository access and automation</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>In Development</h2>
+                <div class="capability">
+                    <div class="capability-icon">🎙️</div>
+                    <div class="capability-info">
+                        <h4>Voice Transcription <span class="tag dev">Planned</span></h4>
+                        <p>Process voice messages in Telegram</p>
+                    </div>
+                </div>
+                <div class="capability">
+                    <div class="capability-icon">🎨</div>
+                    <div class="capability-info">
+                        <h4>Image Generation <span class="tag dev">Planned</span></h4>
+                        <p>DALL-E integration for visuals</p>
+                    </div>
+                </div>
+                <div class="capability">
+                    <div class="capability-icon">📅</div>
+                    <div class="capability-info">
+                        <h4>Calendar <span class="tag dev">Planned</span></h4>
+                        <p>Google Calendar integration</p>
+                    </div>
+                </div>
+                <div class="capability">
+                    <div class="capability-icon">🌐</div>
+                    <div class="capability-info">
+                        <h4>Web Research <span class="tag dev">Planned</span></h4>
+                        <p>Automated web scraping and summarization</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- RECENT ACTIVITY -->
-        <div class="section-title">Recent Activity</div>
-        <div class="card">
-            <div id="activity-feed">
-                <!-- Dynamically populated -->
+        <!-- ============================================ -->
+        <!-- SECTION 3: SYSTEM STATUS                     -->
+        <!-- ============================================ -->
+        <div class="section-title">System Status</div>
+        <div class="status-bar" id="status-bar">
+            <div class="status-item">
+                <div class="status-dot green" id="bridge-status"></div>
+                <span>Telegram Bridge</span>
             </div>
-        </div>
-
-        <!-- OPERATIONS -->
-        <div class="section-title">Operations</div>
-        <div class="grid grid-3">
-            <div class="card">
-                <h2>Automation</h2>
-                <div class="ops-metric">
-                    <span class="ops-label">Telegram Bridge</span>
-                    <span class="ops-value green">Running</span>
-                </div>
-                <div class="ops-metric">
-                    <span class="ops-label">Dashboard Sync</span>
-                    <span class="ops-value green">Hourly</span>
-                </div>
-                <div class="ops-metric">
-                    <span class="ops-label">Conversation Logs</span>
-                    <span class="ops-value green">Active</span>
-                </div>
-                <div class="ops-metric">
-                    <span class="ops-label">Session Tracking</span>
-                    <span class="ops-value green">Active</span>
-                </div>
+            <div class="status-item">
+                <div class="status-dot green" id="claude-status"></div>
+                <span>Claude CLI</span>
             </div>
-
-            <div class="card">
-                <h2>Memory System</h2>
-                <div class="ops-metric">
-                    <span class="ops-label">Shared Context</span>
-                    <span class="ops-value green">MEMORY.md</span>
-                </div>
-                <div class="ops-metric">
-                    <span class="ops-label">Chat History</span>
-                    <span class="ops-value accent">JSONL</span>
-                </div>
-                <div class="ops-metric">
-                    <span class="ops-label">Session Logs</span>
-                    <span class="ops-value accent">thinx_tuning/</span>
-                </div>
-                <div class="ops-metric">
-                    <span class="ops-label">Recovery Docs</span>
-                    <span class="ops-value green">thinx-recovery/</span>
-                </div>
+            <div class="status-item">
+                <div class="status-dot green"></div>
+                <span>Email</span>
             </div>
-
-            <div class="card">
-                <h2>Infrastructure</h2>
-                <div class="ops-metric">
-                    <span class="ops-label">Host</span>
-                    <span class="ops-value">Linux (Native)</span>
-                </div>
-                <div class="ops-metric">
-                    <span class="ops-label">Runtime</span>
-                    <span class="ops-value">Python 3.10+</span>
-                </div>
-                <div class="ops-metric">
-                    <span class="ops-label">LLM</span>
-                    <span class="ops-value">Claude Opus 4.5</span>
-                </div>
-                <div class="ops-metric">
-                    <span class="ops-label">Interface</span>
-                    <span class="ops-value accent">Claude Code CLI</span>
-                </div>
+            <div class="status-item">
+                <div class="status-dot green"></div>
+                <span>GitHub</span>
             </div>
-        </div>
-
-        <!-- DOMAINS -->
-        <div class="section-title">Research Domains</div>
-        <div class="grid grid-4">
-            <a href="https://github.com/jdlongmire/thinx" class="card" style="text-align: center; text-decoration: none; color: inherit;">
-                <h2>ThinxAI</h2>
-                <div style="font-size: 32px; margin: 10px 0;">🧠</div>
-                <p style="font-size: 12px; color: var(--text-muted);">Platform & Automation</p>
-            </a>
-            <a href="https://oddxian.com" class="card" style="text-align: center; text-decoration: none; color: inherit;">
-                <h2>oddXian</h2>
-                <div style="font-size: 32px; margin: 10px 0;">✝️</div>
-                <p style="font-size: 12px; color: var(--text-muted);">Apologetics Research</p>
-                <p style="font-size: 10px; color: var(--accent); margin-top: 8px;">
-                    <a href="https://github.com/jdlongmire/oddxian-apologetics/wiki" style="color: var(--accent);">Wiki</a> |
-                    <a href="https://github.com/jdlongmire/oddxian-apologetics" style="color: var(--accent);">GitHub</a>
-                </p>
-            </a>
-            <a href="https://airesearchandphilosophy.substack.com" class="card" style="text-align: center; text-decoration: none; color: inherit;">
-                <h2>AI Research</h2>
-                <div style="font-size: 32px; margin: 10px 0;">🤖</div>
-                <p style="font-size: 12px; color: var(--text-muted);">AIDK Framework</p>
-            </a>
-            <a href="https://github.com/jdlongmire/logic-realism-theory" class="card" style="text-align: center; text-decoration: none; color: inherit;">
-                <h2>Logic Realism</h2>
-                <div style="font-size: 32px; margin: 10px 0;">🔬</div>
-                <p style="font-size: 12px; color: var(--text-muted);">L3 Theory</p>
-            </a>
-        </div>
-
-        <!-- BACKLOG -->
-        <div class="section-title">Backlog</div>
-        <div class="grid">
-            <div class="card">
-                <h2>Completed</h2>
-                <ul>
-                    <li><span class="check">✓</span> Telegram Bridge with Claude CLI</li>
-                    <li><span class="check">✓</span> Gmail integration (SMTP + IMAP)</li>
-                    <li><span class="check">✓</span> NLP command parsing</li>
-                    <li><span class="check">✓</span> Permission confirmation flow</li>
-                    <li><span class="check">✓</span> Prompt injection safeguards</li>
-                    <li><span class="check">✓</span> Image display in Telegram</li>
-                    <li><span class="check">✓</span> Shared MEMORY.md context</li>
-                    <li><span class="check">✓</span> Disaster recovery documentation</li>
-                    <li><span class="check">✓</span> Full admin permissions</li>
-                </ul>
+            <div class="status-item">
+                <span class="metric" id="commits-today">--</span>
+                <span>commits today</span>
             </div>
-
-            <div class="card">
-                <h2>In Progress</h2>
-                <ul>
-                    <li><span class="pending">◐</span> Dashboard auto-update system</li>
-                    <li><span class="pending">◐</span> ThinxAI.net domain integration</li>
-                </ul>
+            <div class="status-item">
+                <span class="metric" id="uptime-hours">--</span>
+                <span>hrs uptime</span>
             </div>
-
-            <div class="card">
-                <h2>Up Next</h2>
-                <ul>
-                    <li>Voice message transcription</li>
-                    <li>Image generation (DALL-E)</li>
-                    <li>Calendar integration</li>
-                    <li>Web scraping capabilities</li>
-                    <li>Multi-user support</li>
-                </ul>
-            </div>
+            <span class="updated" id="last-updated">Loading...</span>
         </div>
 
         <footer>
-            <p>ThinxAI · <a href="https://thinxai.net">thinxai.net</a> · Claude Opus 4.5</p>
-            <p style="margin-top: 4px;"><a href="https://github.com/jdlongmire/thinx">GitHub</a></p>
+            <p>ThinxAI · Powered by Claude Opus 4.5</p>
+            <p style="margin-top: 8px;">
+                <a href="https://github.com/jdlongmire/thinx">GitHub</a> ·
+                <a href="https://github.com/jdlongmire/oddxian-apologetics/wiki">oddXian Wiki</a> ·
+                <a href="https://oddxian.com">oddxian.com</a>
+            </p>
         </footer>
     </div>
 
@@ -443,50 +363,23 @@
 
                 // Update metrics
                 document.getElementById('commits-today').textContent = data.metrics?.commits_today ?? '--';
-                document.getElementById('telegram-messages').textContent = data.metrics?.telegram_messages ?? '--';
-                document.getElementById('emails-sent').textContent = data.metrics?.emails_sent ?? '--';
                 document.getElementById('uptime-hours').textContent = data.metrics?.uptime_hours ?? '--';
 
-                // Update services status
-                const statusGrid = document.getElementById('status-grid');
-                statusGrid.innerHTML = '';
-                for (const [key, service] of Object.entries(data.services || {})) {
-                    const statusClass = service.status === 'online' ? 'green' :
-                                       service.status === 'degraded' ? 'yellow' : 'red';
-                    statusGrid.innerHTML += `
-                        <div class="status-item">
-                            <div class="status-dot ${statusClass}"></div>
-                            <span class="status-label">${service.label}</span>
-                        </div>
-                    `;
-                }
-
-                // Update activity feed
-                const activityFeed = document.getElementById('activity-feed');
-                activityFeed.innerHTML = '';
-                for (const activity of (data.recent_activity || [])) {
-                    activityFeed.innerHTML += `
-                        <div class="activity-item">
-                            <span class="activity-icon">▸</span>
-                            ${activity}
-                        </div>
-                    `;
-                }
+                // Update bridge status
+                const bridgeStatus = data.services?.telegram_bridge?.status;
+                const bridgeDot = document.getElementById('bridge-status');
+                bridgeDot.className = 'status-dot ' + (bridgeStatus === 'online' ? 'green' : 'red');
 
                 // Update timestamp
-                document.getElementById('last-updated').textContent =
-                    `Updated ${data.updated || 'Unknown'}`;
+                document.getElementById('last-updated').textContent = data.updated || 'Unknown';
 
             } catch (error) {
                 console.error('Failed to load status:', error);
-                document.getElementById('last-updated').textContent = 'Failed to load status';
+                document.getElementById('last-updated').textContent = 'Status unavailable';
             }
         }
 
-        // Load on page load
         loadStatus();
-
-        // Refresh every 5 minutes
         setInterval(loadStatus, 5 * 60 * 1000);
     </script>
 </body>
