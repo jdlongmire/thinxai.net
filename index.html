@@ -71,6 +71,11 @@
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 20px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        a.card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
         }
         .card h2 {
             font-size: 14px;
@@ -360,26 +365,30 @@
         <!-- DOMAINS -->
         <div class="section-title">Research Domains</div>
         <div class="grid grid-4">
-            <div class="card" style="text-align: center;">
+            <a href="https://github.com/jdlongmire/thinx" class="card" style="text-align: center; text-decoration: none; color: inherit;">
                 <h2>ThinxAI</h2>
                 <div style="font-size: 32px; margin: 10px 0;">🧠</div>
                 <p style="font-size: 12px; color: var(--text-muted);">Platform & Automation</p>
-            </div>
-            <div class="card" style="text-align: center;">
+            </a>
+            <a href="https://oddxian.com" class="card" style="text-align: center; text-decoration: none; color: inherit;">
                 <h2>oddXian</h2>
                 <div style="font-size: 32px; margin: 10px 0;">✝️</div>
                 <p style="font-size: 12px; color: var(--text-muted);">Apologetics Research</p>
-            </div>
-            <div class="card" style="text-align: center;">
+                <p style="font-size: 10px; color: var(--accent); margin-top: 8px;">
+                    <a href="https://github.com/jdlongmire/oddxian-apologetics/wiki" style="color: var(--accent);">Wiki</a> |
+                    <a href="https://github.com/jdlongmire/oddxian-apologetics" style="color: var(--accent);">GitHub</a>
+                </p>
+            </a>
+            <a href="https://airesearchandphilosophy.substack.com" class="card" style="text-align: center; text-decoration: none; color: inherit;">
                 <h2>AI Research</h2>
                 <div style="font-size: 32px; margin: 10px 0;">🤖</div>
                 <p style="font-size: 12px; color: var(--text-muted);">AIDK Framework</p>
-            </div>
-            <div class="card" style="text-align: center;">
+            </a>
+            <a href="https://github.com/jdlongmire/logic-realism-theory" class="card" style="text-align: center; text-decoration: none; color: inherit;">
                 <h2>Logic Realism</h2>
                 <div style="font-size: 32px; margin: 10px 0;">🔬</div>
                 <p style="font-size: 12px; color: var(--text-muted);">L3 Theory</p>
-            </div>
+            </a>
         </div>
 
         <!-- BACKLOG -->
