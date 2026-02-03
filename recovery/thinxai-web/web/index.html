@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ThinxAI</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #16213e;
+            padding: 12px 16px;
+            border-bottom: 1px solid #0f3460;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e94560;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        header h1 .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 12px rgba(233, 69, 96, 0.4);
+        }
+
+        .status {
+            font-size: 12px;
+            color: #888;
+            margin-left: auto;
+        }
+
+        .status.connected { color: #4ade80; }
+        .status.error { color: #f87171; }
+
+        nav {
+            margin-left: auto;
+            margin-right: 12px;
+            display: flex;
+            gap: 12px;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            color: #fff;
+            background: #0f3460;
+        }
+
+        nav a.active {
+            color: #e94560;
+            background: rgba(233, 69, 96, 0.1);
+        }
+
+        #chat {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background: #0f3460;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.assistant {
+            background: #16213e;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.assistant pre {
+            background: #0d1b2a;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 8px 0;
+        }
+
+        .message.assistant code {
+            font-family: 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .message.assistant p code {
+            background: #0d1b2a;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .message.typing {
+            color: #888;
+            font-style: italic;
+        }
+
+        #input-area {
+            padding: 12px 16px;
+            background: #16213e;
+            border-top: 1px solid #0f3460;
+            display: flex;
+            gap: 8px;
+            flex-wrap: nowrap;
+            align-items: flex-end;
+        }
+
+        #message-input {
+            flex: 1;
+            min-width: 0;
+            background: #1a1a2e;
+            border: 1px solid #0f3460;
+            border-radius: 20px;
+            padding: 10px 14px;
+            color: #eee;
+            font-size: 14px;
+            outline: none;
+            resize: none;
+            min-height: 40px;
+            max-height: 120px;
+        }
+
+        #message-input:focus {
+            border-color: #e94560;
+        }
+
+        #send-btn {
+            background: #e94560;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #send-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
+
+        #send-btn:active:not(:disabled) {
+            transform: scale(0.95);
+        }
+
+        #upload-btn {
+            background: #0f3460;
+            color: #aaa;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #upload-btn:hover {
+            background: #1a4a7a;
+            color: #fff;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .file-preview {
+            background: #0f3460;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .file-preview .name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .file-preview .remove {
+            color: #f87171;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .file-preview .size {
+            color: #888;
+            font-size: 11px;
+        }
+
+        .drop-zone {
+            border: 2px dashed #0f3460;
+            background: rgba(15, 52, 96, 0.2);
+        }
+
+        .message.assistant img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        /* Markdown styling */
+        .message.assistant h1, .message.assistant h2, .message.assistant h3 {
+            margin: 12px 0 8px 0;
+            font-weight: 600;
+        }
+        .message.assistant h1 { font-size: 1.3em; }
+        .message.assistant h2 { font-size: 1.15em; }
+        .message.assistant h3 { font-size: 1.05em; }
+
+        .message.assistant ul, .message.assistant ol {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        .message.assistant li {
+            margin: 4px 0;
+        }
+
+        .message.assistant blockquote {
+            border-left: 3px solid #e94560;
+            padding-left: 12px;
+            margin: 8px 0;
+            color: #aaa;
+        }
+
+        .message.assistant a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .message.assistant a:hover {
+            text-decoration: underline;
+        }
+
+        .message.assistant strong {
+            color: #fff;
+        }
+
+        .message.assistant hr {
+            border: none;
+            border-top: 1px solid #374151;
+            margin: 12px 0;
+        }
+
+        .message.assistant table {
+            border-collapse: collapse;
+            margin: 8px 0;
+            width: 100%;
+        }
+
+        .message.assistant th, .message.assistant td {
+            border: 1px solid #374151;
+            padding: 6px 10px;
+            text-align: left;
+        }
+
+        .message.assistant th {
+            background: #374151;
+        }
+
+        /* Image modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .image-modal img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><img src="avatar.png" alt="ThinxAI Logo" class="logo">ThinxAI</h1>
+        <nav>
+            <a href="/" class="active">Chat</a>
+            <a href="/skills">Skills</a>
+        </nav>
+    </header>
+
+    <div id="chat"></div>
+
+    <div id="input-area">
+        <input type="file" id="file-input" multiple>
+        <button id="upload-btn" title="Upload file">&#128206;</button>
+        <textarea id="message-input" placeholder="Message..." rows="1"></textarea>
+        <button id="send-btn" disabled>&#10148;</button>
+    </div>
+    <div id="file-preview-area"></div>
+
+    <div class="image-modal" id="image-modal">
+        <img src="" alt="Fullscreen image">
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin;
+        const chat = document.getElementById('chat');
+        const input = document.getElementById('message-input');
+        const sendBtn = document.getElementById('send-btn');
+        const statusEl = document.getElementById('status');
+        const uploadBtn = document.getElementById('upload-btn');
+        const fileInput = document.getElementById('file-input');
+        const filePreviewArea = document.getElementById('file-preview-area');
+        const imageModal = document.getElementById('image-modal');
+        const modalImg = imageModal.querySelector('img');
+
+        let isSending = false;
+        let pendingFiles = [];
+
+        // Configure marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: false,
+            mangle: false
+        });
+
+        // Image modal
+        imageModal.addEventListener('click', () => {
+            imageModal.classList.remove('active');
+        });
+
+        function openImageModal(src) {
+            modalImg.src = src;
+            imageModal.classList.add('active');
+        }
+
+        function processImages(content) {
+            const imagePattern = /\[ACTION:show_image\|([^\]]+)\]/g;
+            let match;
+            const images = [];
+            while ((match = imagePattern.exec(content)) !== null) {
+                images.push(match[1]);
+            }
+            content = content.replace(imagePattern, '');
+            return { content, images };
+        }
+
+        // Auto-resize textarea
+        input.addEventListener('input', () => {
+            input.style.height = 'auto';
+            input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+            updateSendButton();
+        });
+
+        // Enter to send
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (!sendBtn.disabled) sendMessage();
+            }
+        });
+
+        sendBtn.addEventListener('click', sendMessage);
+
+        // File upload
+        uploadBtn.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            addFiles(Array.from(e.target.files));
+            fileInput.value = '';
+        });
+
+        // Drag and drop
+        chat.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            chat.classList.add('drop-zone');
+        });
+
+        chat.addEventListener('dragleave', () => {
+            chat.classList.remove('drop-zone');
+        });
+
+        chat.addEventListener('drop', (e) => {
+            e.preventDefault();
+            chat.classList.remove('drop-zone');
+            addFiles(Array.from(e.dataTransfer.files));
+        });
+
+        function addFiles(files) {
+            for (const file of files) {
+                if (file.size > 20 * 1024 * 1024) {
+                    alert(`File too large: ${file.name} (max 20MB)`);
+                    continue;
+                }
+                pendingFiles.push(file);
+            }
+            updateFilePreview();
+            updateSendButton();
+        }
+
+        function updateFilePreview() {
+            filePreviewArea.innerHTML = '';
+            for (let i = 0; i < pendingFiles.length; i++) {
+                const file = pendingFiles[i];
+                const size = file.size < 1024 ? `${file.size}B` :
+                             file.size < 1024*1024 ? `${(file.size/1024).toFixed(1)}KB` :
+                             `${(file.size/1024/1024).toFixed(1)}MB`;
+                const div = document.createElement('div');
+                div.className = 'file-preview';
+                div.innerHTML = `
+                    <span class="name">${file.name}</span>
+                    <span class="size">${size}</span>
+                    <span class="remove" data-index="${i}">&times;</span>
+                `;
+                filePreviewArea.appendChild(div);
+            }
+            filePreviewArea.querySelectorAll('.remove').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idx = parseInt(e.target.dataset.index);
+                    pendingFiles.splice(idx, 1);
+                    updateFilePreview();
+                    updateSendButton();
+                });
+            });
+        }
+
+        function updateSendButton() {
+            sendBtn.disabled = (!input.value.trim() && pendingFiles.length === 0) || isSending;
+        }
+
+        async function uploadFiles() {
+            const uploaded = [];
+            for (const file of pendingFiles) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                try {
+                    const res = await fetch(`${API_BASE}/api/upload`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        uploaded.push(data);
+                    }
+                } catch (e) {
+                    console.error('Upload failed:', e);
+                }
+            }
+            pendingFiles = [];
+            updateFilePreview();
+            return uploaded;
+        }
+
+        function addMessage(content, role, skipMarkdown = false) {
+            const msg = document.createElement('div');
+            msg.className = `message ${role}`;
+
+            if (role === 'assistant' && !skipMarkdown && !msg.classList.contains('typing')) {
+                const { content: cleanContent, images } = processImages(content);
+                msg.innerHTML = marked.parse(cleanContent);
+
+                images.forEach(imgPath => {
+                    const img = document.createElement('img');
+                    img.src = `/api/image?path=${encodeURIComponent(imgPath)}`;
+                    img.alt = 'Image';
+                    img.addEventListener('click', () => openImageModal(img.src));
+                    msg.appendChild(img);
+                });
+
+                msg.querySelectorAll('img').forEach(img => {
+                    img.addEventListener('click', () => openImageModal(img.src));
+                });
+            } else {
+                msg.textContent = content;
+            }
+
+            chat.appendChild(msg);
+            chat.scrollTop = chat.scrollHeight;
+            return msg;
+        }
+
+        function setStatus(text, type = '') {
+            statusEl.textContent = text;
+            statusEl.className = 'status ' + type;
+        }
+
+        async function checkStatus() {
+            try {
+                const res = await fetch(`${API_BASE}/api/status`);
+                if (res.ok) {
+                    setStatus('Connected', 'connected');
+                    sendBtn.disabled = !input.value.trim() && pendingFiles.length === 0;
+                } else {
+                    setStatus('Error', 'error');
+                }
+            } catch (e) {
+                setStatus('Offline', 'error');
+            }
+        }
+
+        async function loadHistory() {
+            try {
+                const res = await fetch(`${API_BASE}/api/history`);
+                if (res.ok) {
+                    const history = await res.json();
+                    for (const msg of history) {
+                        addMessage(msg.content, msg.role);
+                    }
+                }
+            } catch (e) {
+                console.error('Failed to load history:', e);
+            }
+        }
+
+        async function sendMessage() {
+            const text = input.value.trim();
+            const hasFiles = pendingFiles.length > 0;
+
+            if (!text && !hasFiles) return;
+            if (isSending) return;
+
+            isSending = true;
+            sendBtn.disabled = true;
+            input.value = '';
+            input.style.height = 'auto';
+
+            // Upload files first
+            let uploadedFiles = [];
+            if (hasFiles) {
+                addMessage(`Uploading ${pendingFiles.length} file(s)...`, 'user');
+                uploadedFiles = await uploadFiles();
+
+                if (uploadedFiles.length > 0) {
+                    const fileList = uploadedFiles.map(f => `📄 ${f.filename}`).join('\n');
+                    addMessage(`Uploaded:\n${fileList}`, 'assistant');
+                }
+            }
+
+            if (text) {
+                let messageText = text;
+                if (uploadedFiles.length > 0) {
+                    const filePaths = uploadedFiles.map(f => f.path).join(', ');
+                    messageText = `[Uploaded files: ${filePaths}]\n${text}`;
+                }
+
+                addMessage(text, 'user', true);
+                const typingMsg = addMessage('Thinking...', 'assistant', true);
+                typingMsg.classList.add('typing');
+
+                try {
+                    const res = await fetch(`${API_BASE}/api/message/stream`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: messageText })
+                    });
+
+                    if (!res.ok) {
+                        typingMsg.textContent = 'Error: ' + res.statusText;
+                        typingMsg.classList.remove('typing');
+                    } else {
+                        const reader = res.body.getReader();
+                        const decoder = new TextDecoder();
+                        let buffer = '';
+                        let responseChunks = [];
+                        const MAX_BUFFER_SIZE = 512 * 1024;
+
+                        function processLine(line) {
+                            if (line.startsWith('data: ')) {
+                                try {
+                                    const event = JSON.parse(line.slice(6));
+                                    if (event.type === 'status') {
+                                        typingMsg.textContent = event.message;
+                                    } else if (event.type === 'tool') {
+                                        typingMsg.textContent = `🔧 ${event.message}`;
+                                    } else if (event.type === 'tool_result') {
+                                        typingMsg.textContent = '✓ ' + event.message;
+                                    } else if (event.type === 'response_chunk') {
+                                        responseChunks.push(event.content || '');
+                                        typingMsg.textContent = 'Receiving response...';
+                                    } else if (event.type === 'response') {
+                                        typingMsg.remove();
+                                        const fullContent = responseChunks.length > 0
+                                            ? responseChunks.join('') + (event.content || '')
+                                            : (event.content || 'No response');
+                                        addMessage(fullContent, 'assistant');
+                                        responseChunks = [];
+                                    } else if (event.type === 'done') {
+                                        // Stream complete - cleanup if response wasn't already shown
+                                        if (typingMsg.parentNode && responseChunks.length > 0) {
+                                            typingMsg.remove();
+                                            addMessage(responseChunks.join(''), 'assistant');
+                                            responseChunks = [];
+                                        }
+                                    } else if (event.type === 'error') {
+                                        typingMsg.textContent = 'Error: ' + event.message;
+                                        typingMsg.classList.remove('typing');
+                                    }
+                                } catch (e) {
+                                    console.warn('SSE parse error:', e.message);
+                                }
+                            }
+                        }
+
+                        try {
+                            while (true) {
+                                const { done, value } = await reader.read();
+                                if (done) break;
+
+                                const chunk = decoder.decode(value, { stream: true });
+                                buffer += chunk;
+
+                                if (buffer.length > MAX_BUFFER_SIZE && !buffer.includes('\n')) {
+                                    console.warn('SSE buffer overflow - resetting');
+                                    buffer = '';
+                                    continue;
+                                }
+
+                                const lines = buffer.split('\n');
+                                buffer = lines.pop();
+
+                                for (const line of lines) {
+                                    processLine(line);
+                                }
+                            }
+                        } catch (streamError) {
+                            console.error('Stream error details:', streamError);
+                            // Check if we got partial response chunks
+                            if (responseChunks.length > 0) {
+                                typingMsg.remove();
+                                addMessage(responseChunks.join('') + '\n\n[Response truncated due to stream error]', 'assistant');
+                            } else {
+                                // Show more detail about the error
+                                const errMsg = streamError.message || String(streamError);
+                                typingMsg.textContent = `Stream error: ${errMsg.substring(0, 100)}`;
+                                typingMsg.classList.remove('typing');
+                            }
+                        }
+
+                        if (buffer.trim()) {
+                            processLine(buffer);
+                        }
+                    }
+                } catch (e) {
+                    typingMsg.textContent = 'Error: ' + e.message;
+                    typingMsg.classList.remove('typing');
+                }
+            }
+
+            isSending = false;
+            updateSendButton();
+        }
+
+        // Initialize
+        checkStatus();
+        loadHistory();
+        setInterval(checkStatus, 30000);
+    </script>
+</body>
+</html>

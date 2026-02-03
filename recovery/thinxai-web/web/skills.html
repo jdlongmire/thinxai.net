@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThinxAI - Skills & Features</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #16213e;
+            padding: 12px 16px;
+            border-bottom: 1px solid #0f3460;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e94560;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        header h1 .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 12px rgba(233, 69, 96, 0.4);
+            transition: opacity 0.2s;
+        }
+
+        header h1 .logo:hover {
+            opacity: 0.8;
+        }
+
+        nav {
+            margin-left: auto;
+            display: flex;
+            gap: 16px;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            color: #fff;
+            background: #0f3460;
+        }
+
+        nav a.active {
+            color: #e94560;
+            background: rgba(233, 69, 96, 0.1);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            border-radius: 16px;
+            margin-bottom: 32px;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .hero p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h3 {
+            font-size: 20px;
+            color: #e94560;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #0f3460;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #0f3460;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: #e94560;
+            transform: translateY(-2px);
+        }
+
+        .card h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h4 .icon {
+            font-size: 20px;
+        }
+
+        .card p {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .card .command {
+            font-family: 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+            background: #0d1b2a;
+            color: #4ade80;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        .card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .card .tag {
+            background: rgba(233, 69, 96, 0.15);
+            color: #e94560;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            background: #16213e;
+            border-radius: 8px;
+        }
+
+        .feature-item .check {
+            color: #4ade80;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .feature-item span {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .integrations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .integration {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #16213e;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #0f3460;
+        }
+
+        .integration .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+        }
+
+        .integration .dot.pending {
+            background: #facc15;
+        }
+
+        .code-block {
+            background: #0d1b2a;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        .code-block .comment {
+            color: #6b7280;
+        }
+
+        .code-block .command {
+            color: #4ade80;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: #666;
+            font-size: 13px;
+            border-top: 1px solid #0f3460;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            main {
+                padding: 16px;
+            }
+            .hero {
+                padding: 24px 16px;
+            }
+            .hero h2 {
+                font-size: 22px;
+            }
+            nav {
+                gap: 8px;
+            }
+            nav a {
+                padding: 6px 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><img src="avatar.png" alt="ThinxAI Logo" class="logo" onclick="location.reload()" style="cursor: pointer;" title="Refresh page"> ThinxAI</h1>
+        <nav>
+            <a href="/">Chat</a>
+            <a href="/skills" class="active">Skills</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h2>ThinxAI Skills & Features</h2>
+            <p>Your AI-powered assistant with specialized capabilities for diagramming, development, research, and automation.</p>
+        </div>
+
+        <div class="section">
+            <h3>Diagram Generation</h3>
+            <div class="cards">
+                <div class="card" style="border-color: #8B5CF6; background: linear-gradient(135deg, #16213e 0%, rgba(139, 92, 246, 0.15) 100%);">
+                    <h4><span class="icon">&#127912;</span> Draw Bot <span style="background: #8B5CF6; color: white; font-size: 10px; padding: 2px 6px; border-radius: 8px; margin-left: 8px;">NEW</span></h4>
+                    <p>Guided diagramming assistant that asks the right questions to create exactly what you need. Supports all diagram types with professional styling.</p>
+                    <a href="/draw_bot" style="display: inline-block; background: #8B5CF6; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; margin-top: 8px;">Open Draw Bot</a>
+                    <div class="tags">
+                        <span class="tag">guided</span>
+                        <span class="tag">professional</span>
+                        <span class="tag">all types</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4><span class="icon">&#128202;</span> Mermaid</h4>
+                    <p>Generate flowcharts, sequence diagrams, class diagrams, state machines, ER diagrams, mindmaps, timelines, and more with Mermaid v11.</p>
+                    <span class="command">/mermaid</span>
+                    <div class="tags">
+                        <span class="tag">flowchart</span>
+                        <span class="tag">sequence</span>
+                        <span class="tag">kanban</span>
+                        <span class="tag">sankey</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4><span class="icon">&#128736;</span> D2</h4>
+                    <p>Modern diagram language with animated SVGs, SQL tables, better auto-layout, and sketch style support.</p>
+                    <span class="command">/d2</span>
+                    <div class="tags">
+                        <span class="tag">animated</span>
+                        <span class="tag">SQL tables</span>
+                        <span class="tag">sketch mode</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4><span class="icon">&#127970;</span> Structurizr</h4>
+                    <p>Professional C4 architecture diagrams with proper model semantics. System context, container, and component views.</p>
+                    <span class="command">/structurizr</span>
+                    <div class="tags">
+                        <span class="tag">C4 model</span>
+                        <span class="tag">enterprise</span>
+                        <span class="tag">architecture</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4><span class="icon">&#127760;</span> Kroki</h4>
+                    <p>Universal diagram generator supporting 20+ formats via API: PlantUML, bytefield, wavedrom, ERD, BPMN, and more.</p>
+                    <span class="command">/kroki</span>
+                    <div class="tags">
+                        <span class="tag">PlantUML</span>
+                        <span class="tag">wavedrom</span>
+                        <span class="tag">20+ formats</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4><span class="icon">&#128269;</span> Diagram Scanner</h4>
+                    <p>Auto-generate architecture diagrams by scanning your codebase. Detect patterns, dependencies, and relationships.</p>
+                    <span class="command">/diagram-scan</span>
+                    <div class="tags">
+                        <span class="tag">auto-detect</span>
+                        <span class="tag">dependencies</span>
+                        <span class="tag">classes</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4><span class="icon">&#127912;</span> Architecture</h4>
+                    <p>High-level architecture diagram generator with support for infrastructure icons, cloud providers, and system components.</p>
+                    <span class="command">/architecture</span>
+                    <div class="tags">
+                        <span class="tag">infrastructure</span>
+                        <span class="tag">cloud</span>
+                        <span class="tag">icons</span>
+                    </div>
+                </div>
+
+                <div class="card" style="border-color: #f08705; background: linear-gradient(135deg, #16213e 0%, rgba(240, 135, 5, 0.15) 100%);">
+                    <h4><span class="icon">&#9998;</span> Draw.io</h4>
+                    <p>Full-featured diagram editor with drag-and-drop interface. Create flowcharts, org charts, network diagrams, wireframes, and more manually.</p>
+                    <a href="https://app.diagrams.net/" target="_blank" style="display: inline-block; background: #f08705; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; margin-top: 8px;">Open Draw.io</a>
+                    <div class="tags">
+                        <span class="tag">drag & drop</span>
+                        <span class="tag">manual</span>
+                        <span class="tag">export</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Core Capabilities</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Code reading, writing, and editing</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Git operations and version control</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>File system navigation and management</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Shell command execution</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Web search and content fetching</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Persistent conversation memory</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Multi-agent task handling</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Image generation and viewing</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Email sending with attachments</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Calendar invite generation</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>File uploads (drag & drop)</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check">&#10003;</span>
+                    <span>Streaming responses</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Integrations</h3>
+            <div class="integrations">
+                <div class="integration">
+                    <span class="dot"></span>
+                    <span>Claude Code CLI</span>
+                </div>
+                <div class="integration">
+                    <span class="dot"></span>
+                    <span>GitHub CLI</span>
+                </div>
+                <div class="integration">
+                    <span class="dot"></span>
+                    <span>Mermaid CLI v11</span>
+                </div>
+                <div class="integration">
+                    <span class="dot"></span>
+                    <span>D2 v0.6</span>
+                </div>
+                <div class="integration">
+                    <span class="dot"></span>
+                    <span>Python Diagrams</span>
+                </div>
+                <div class="integration">
+                    <span class="dot"></span>
+                    <span>Graphviz</span>
+                </div>
+                <div class="integration">
+                    <span class="dot"></span>
+                    <span>Kroki API</span>
+                </div>
+                <div class="integration">
+                    <span class="dot"></span>
+                    <span>Email (msmtp)</span>
+                </div>
+                <div class="integration">
+                    <span class="dot"></span>
+                    <span>Legato MCP</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Example Usage</h3>
+            <div class="code-block">
+                <span class="comment"># Generate a flowchart</span><br>
+                <span class="command">/mermaid flowchart of user authentication</span><br><br>
+                <span class="comment"># Create a C4 architecture diagram</span><br>
+                <span class="command">/structurizr e-commerce system with web, API, and database</span><br><br>
+                <span class="comment"># Scan codebase for architecture</span><br>
+                <span class="command">/diagram-scan --architecture</span><br><br>
+                <span class="comment"># Send an email</span><br>
+                <span class="command">Send an email to user@example.com about the meeting</span><br><br>
+                <span class="comment"># Create a calendar invite</span><br>
+                <span class="command">Create a calendar invite for Feb 5 at 2pm</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Research Domains</h3>
+            <div class="cards">
+                <div class="card">
+                    <h4><span class="icon">&#129504;</span> AI Research (AIDK)</h4>
+                    <p>Framework for understanding AI limitations through Origination vs Derivation distinction. AIDK, IDKE, HCAE, MAPT concepts.</p>
+                    <div class="tags">
+                        <span class="tag">epistemology</span>
+                        <span class="tag">AI limits</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4><span class="icon">&#128172;</span> Logic Realism Theory</h4>
+                    <p>L3 (Identity, Non-Contradiction, Excluded Middle) as ontological constraints deriving quantum mechanics.</p>
+                    <div class="tags">
+                        <span class="tag">ontology</span>
+                        <span class="tag">QM derivation</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4><span class="icon">&#9775;</span> oddXian Apologetics</h4>
+                    <p>Rigorous Christian apologetics with Consilience Argument, Christian Designism, and young-earth geology models.</p>
+                    <div class="tags">
+                        <span class="tag">apologetics</span>
+                        <span class="tag">theology</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Powered by <a href="https://anthropic.com/claude" target="_blank">Claude</a> | ThinxAI &copy; 2026</p>
+    </footer>
+</body>
+</html>

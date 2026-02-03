@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/.claude/hooks/session-init.sh"
+          },
+          {
+            "type": "prompt",
+            "prompt": "REQUIRED: Before any work, you MUST: 1) Read memory/meta-context/current/vscode-claude.md to get your Agent ID from the SESSION START entry, 2) Read memory/meta-context/current/telegram-bridge.md for cross-agent context, 3) Read MEMORY.md for project context. Log significant activities to vscode-claude.md using your Agent ID.",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(wsl which:*)",
+      "Bash(if not exist \"C:\\\\Users\\\\ThinxAI\\\\scripts\" mkdir \"C:\\\\Users\\\\ThinxAI\\\\scripts\")"
+    ]
+  }
+}

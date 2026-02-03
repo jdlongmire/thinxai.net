@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wget:*)",
+      "Bash(curl:*)",
+      "Bash(gh:*)",
+      "Bash(git:*)",
+      "Bash(npm:*)",
+      "Bash(node:*)",
+      "Bash(python3:*)",
+      "Bash(pip3:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(cat:*)",
+      "Bash(systemctl:*)",
+      "Bash(ffmpeg:*)",
+      "Read(//home/**)",
+      "Read(//media/**)",
+      "Read(//etc/**)",
+      "mcp__legato__list_recent_notes",
+      "mcp__legato__list_tasks",
+      "mcp__legato__list_categories",
+      "mcp__legato__get_note",
+      "mcp__legato__get_note_context",
+      "mcp__legato__link_notes",
+      "mcp__legato__create_note",
+      "mcp__legato__update_note",
+      "mcp__legato__search_library",
+      "mcp__legato__check_connection"
+    ]
+  }
+}
