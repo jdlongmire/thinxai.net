@@ -37,9 +37,11 @@ lsblk
 ### 2. Run Setup Script
 
 ```bash
-cd /media/$USER/Macro-Drive-2TB/GitHub_Repos/thinx/thinx-recovery
+cd /path/to/thinx-recovery
 bash setup.sh
 ```
+
+> **Note:** Replace `/path/to/thinx-recovery` with wherever you downloaded or cloned this folder.
 
 ### 3. Configure Credentials
 
