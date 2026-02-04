@@ -14,10 +14,29 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
+RED='\033[0;31m'
+
 echo ""
 echo -e "${CYAN}╔══════════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║                      ThinxAI Installer                           ║${NC}"
 echo -e "${CYAN}╚══════════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+# Risk warning
+echo -e "${RED}╔══════════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${RED}║                     ⚠️  HIGH RISK WARNING ⚠️                       ║${NC}"
+echo -e "${RED}╠══════════════════════════════════════════════════════════════════╣${NC}"
+echo -e "${RED}║  This installs an AI assistant with significant system access:   ║${NC}"
+echo -e "${RED}║                                                                  ║${NC}"
+echo -e "${RED}║  • Executes shell commands on your machine                       ║${NC}"
+echo -e "${RED}║  • Reads/writes/deletes files across your filesystem             ║${NC}"
+echo -e "${RED}║  • Stores API keys and credentials in plain text                 ║${NC}"
+echo -e "${RED}║  • Enables remote execution via Telegram bridge                  ║${NC}"
+echo -e "${RED}║  • Runs with YOUR user permissions (including sudo if enabled)   ║${NC}"
+echo -e "${RED}║                                                                  ║${NC}"
+echo -e "${RED}║  Only proceed if you understand and accept these risks.          ║${NC}"
+echo -e "${RED}║  Recommended: Use a dedicated machine or VM, not your primary.   ║${NC}"
+echo -e "${RED}╚══════════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
 # Check prerequisites

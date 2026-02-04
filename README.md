@@ -4,6 +4,31 @@
 
 A locally-hosted AI assistant framework that handles system administration, automation, and cross-device coordination while keeping your data on your hardware.
 
+## ⚠️ Risk Warning
+
+**This is a HIGH-RISK installation.** ThinxAI gives an AI assistant significant control over your system:
+
+| Risk | Description |
+|------|-------------|
+| **System Access** | Claude Code can execute arbitrary shell commands on your machine |
+| **File Access** | AI can read, modify, and delete files across your filesystem |
+| **Credential Exposure** | Installation stores API keys, email credentials, and tokens in plain text config files |
+| **Remote Execution** | Telegram bridge enables remote command execution from mobile |
+| **No Sandbox** | Commands run with your user's full permissions (sudo if available) |
+| **Pipe to Bash** | The curl install method executes remote code without prior inspection |
+
+**This framework is designed for power users who understand these risks and want AI-assisted system administration anyway.** If you're uncomfortable with any of the above, this project is not for you.
+
+### Mitigation
+
+- Run on a dedicated machine or VM, not your primary workstation
+- Use a non-sudo user account where possible
+- Review all scripts before running (`git clone` then inspect)
+- Monitor `~/.thinxai/logs/` for executed commands
+- Never expose the web interface to the internet without authentication
+
+---
+
 ## Quick Install
 
 ```bash
