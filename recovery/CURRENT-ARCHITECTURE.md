@@ -22,7 +22,7 @@
 |-------|------|-------|------------|---------|
 | sda (SSD) | 238 GB | `/` | ext4 | Ubuntu system (118 GB partition) |
 | sda3 | 119 GB | - | ntfs | Windows partition (dual-boot) |
-| sdb (HDD) | 1.8 TB | `/media/jdlongmire/Macro-Drive-2TB` | ntfs | Data/GitHub repos |
+| sdb (HDD) | 1.8 TB | `/media/$USER/<external-drive>` | ntfs | Data/GitHub repos |
 
 ---
 
@@ -99,7 +99,7 @@ GMAIL_APP_PASSWORD=<app_password>
 
 ---
 
-## Cron Jobs (User: jdlongmire)
+## Cron Jobs (User: $USER)
 
 | Schedule | Script | Log | Purpose |
 |----------|--------|-----|---------|
