@@ -3,414 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThinxAI - Research Gateway</title>
+    <title>ThinxAI - Agentic Orchestrator & Local Sysadmin</title>
+    <meta name="description" content="ThinxAI is a locally-hosted AI assistant framework for system administration, automation, and cross-device coordination.">
     <style>
         :root {
-            --bg: #0d1117;
-            --card-bg: #161b22;
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
             --border: #30363d;
             --text: #c9d1d9;
             --text-muted: #8b949e;
             --accent: #58a6ff;
-            --green: #3fb950;
-            --yellow: #d29922;
-            --red: #f85149;
-            --purple: #a371f7;
-            --orange: #f0883e;
-            --gold: #d4a84b;
+            --accent-green: #3fb950;
+            --accent-purple: #a371f7;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--bg);
+            background: var(--bg-dark);
             color: var(--text);
-            padding: 20px;
-            min-height: 100vh;
+            line-height: 1.6;
         }
-        .container { max-width: 1200px; margin: 0 auto; }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
         header {
-            text-align: center;
-            margin-bottom: 32px;
-            padding-bottom: 24px;
+            padding: 2rem 0;
             border-bottom: 1px solid var(--border);
         }
-        .avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent);
-            margin-bottom: 16px;
-        }
-        h1 { font-size: 32px; font-weight: 600; margin-bottom: 8px; }
-        .tagline { color: var(--text-muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
-        .section-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 40px 0 16px 0;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .grid { display: grid; gap: 16px; margin-bottom: 24px; }
-        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            transition: border-color 0.2s, transform 0.2s;
-        }
-        a.card { text-decoration: none; color: inherit; display: block; }
-        a.card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        .card h2 {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-        .card h3 { font-size: 20px; margin-bottom: 8px; }
-        .card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
-
-        /* Hero Card - oddXian */
-        .hero-card {
-            background: linear-gradient(135deg, var(--card-bg) 0%, #1a1f2e 100%);
-            border: 2px solid var(--gold);
-            padding: 32px;
-            text-align: center;
-        }
-        .hero-card .icon { font-size: 48px; margin-bottom: 16px; }
-        .hero-image {
-            width: 100%;
-            max-width: 600px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .hero-card h3 { font-size: 28px; color: var(--gold); margin-bottom: 12px; }
-        .hero-card .subtitle { font-size: 16px; color: var(--text); margin-bottom: 16px; }
-        .hero-card .links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .hero-card .links a {
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
             color: var(--accent);
-            font-size: 14px;
-            padding: 8px 16px;
-            border: 1px solid var(--accent);
-            border-radius: 6px;
+        }
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .install-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .install-box code {
+            display: block;
+            background: var(--bg-dark);
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 1rem;
+            color: var(--accent-green);
+            cursor: pointer;
             transition: background 0.2s;
         }
-        .hero-card .links a:hover {
-            background: rgba(88, 166, 255, 0.1);
+        .install-box code:hover {
+            background: #1c2128;
         }
-
-        /* Domain Cards */
-        .domain-card { text-align: center; }
-        .domain-card .icon { font-size: 36px; margin-bottom: 12px; }
-        .domain-card h3 { font-size: 18px; margin-bottom: 6px; }
-        .domain-links { margin-top: 12px; font-size: 12px; }
-        .domain-links a { color: var(--accent); }
-
-        /* Capability Items */
-        .capability {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .capability:last-child { border-bottom: none; }
-        .capability-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            background: var(--border);
-            flex-shrink: 0;
-        }
-        .capability-info h4 { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
-        .capability-info p { font-size: 12px; color: var(--text-muted); }
-        .tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            margin-left: 8px;
-            background: rgba(63,185,80,0.2);
-            color: var(--green);
-        }
-        .tag.dev { background: rgba(210,153,34,0.2); color: var(--yellow); }
-
-        /* Status Section */
-        .status-bar {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
-            padding: 16px 20px;
-            background: var(--card-bg);
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            font-size: 13px;
-        }
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-        .status-dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
-        .status-dot.yellow { background: var(--yellow); }
-        .status-dot.red { background: var(--red); }
-        .metric {
-            color: var(--accent);
-            font-weight: 600;
-        }
-        .updated { color: var(--text-muted); margin-left: auto; }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding-top: 32px;
+        .install-box .copy-hint {
+            font-size: 0.875rem;
             color: var(--text-muted);
-            font-size: 12px;
+            margin-top: 0.5rem;
         }
-        footer a { color: var(--accent); text-decoration: none; }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+        .btn-primary:hover { background: #79b8ff; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--text-muted); }
+        .features {
+            padding: 4rem 0;
+        }
+        .features h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .feature-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .philosophy {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+        }
+        .philosophy h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .philosophy-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .philosophy-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .principles {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .principle {
+            text-align: center;
+        }
+        .principle .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .principle .label {
+            font-weight: 600;
+            color: var(--text);
+        }
+        .interfaces {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+        }
+        .interfaces h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .interface-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .interface-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .interface-item .name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .interface-item .desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+        }
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .hero .subtitle { font-size: 1rem; }
+            .principles { flex-direction: column; gap: 1rem; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="avatar.png" alt="ThinxAI" class="avatar">
-            <h1>ThinxAI</h1>
-            <p class="tagline">AI-powered research assistant exploring the intersection of faith, logic, and technology</p>
-        </header>
+    <header>
+        <div class="container">
+            <div class="logo">ThinxAI</div>
+        </div>
+    </header>
 
-        <!-- ============================================ -->
-        <!-- SECTION 1: RESEARCH GATEWAY                  -->
-        <!-- ============================================ -->
+    <section class="hero">
+        <div class="container">
+            <h1>Agentic Orchestrator & Local Sysadmin</h1>
+            <p class="subtitle">
+                A locally-hosted AI assistant framework for system administration,
+                automation, and cross-device coordination. Your data stays on your hardware.
+            </p>
 
-        <!-- oddXian - Primary Research Focus -->
-        <div class="card hero-card">
-            <img src="oddxian-banner-vitruvian.png" alt="oddXian Apologetics" class="hero-image">
-            <h3>oddXian Apologetics</h3>
-            <p class="subtitle">Rigorous Christian apologetics — Challenge the consensus</p>
-            <p>Working out the harmony of God's Word and God's World through logical argumentation and scriptural fidelity</p>
-            <div class="links">
-                <a href="https://oddxian.com">Substack</a>
-                <a href="https://github.com/jdlongmire/oddxian-apologetics/wiki">Research Wiki</a>
-                <a href="https://github.com/jdlongmire/oddxian-apologetics">GitHub</a>
+            <div class="install-box">
+                <code onclick="navigator.clipboard.writeText(this.innerText)">curl -fsSL https://thinxai.net/install | bash</code>
+                <p class="copy-hint">Click to copy</p>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="https://github.com/jdlongmire/thinxai.net" class="btn btn-primary">View on GitHub</a>
+                <a href="thinxai-install/README.md" class="btn btn-secondary">Documentation</a>
             </div>
         </div>
+    </section>
 
-        <!-- Other Research Domains -->
-        <div class="section-title">Related Research</div>
-        <div class="grid grid-3">
-            <div class="card domain-card">
-                <div class="icon">🤖</div>
-                <h3>AI Research</h3>
-                <p>Exploring the limits and strengths of artificial intelligence</p>
-                <p class="domain-links">
-                    <a href="https://airesearchandphilosophy.substack.com">Substack</a> |
-                    <a href="https://github.com/jdlongmire/AI-Research">GitHub</a>
+    <section class="features">
+        <div class="container">
+            <h2>What You Get</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>AI-Powered Sysadmin</h3>
+                    <p>Claude Code handles system administration tasks with human oversight. Monitoring, automation, and maintenance at your fingertips.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multi-Device Coordination</h3>
+                    <p>Connect your machines via Tailscale mesh networking. Spawn tasks on remote servers, run local LLMs, coordinate across your infrastructure.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multiple Interfaces</h3>
+                    <p>Access your agent via terminal, Telegram bot, or web chat. Choose what works for your workflow.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Privacy First</h3>
+                    <p>Your data stays on your hardware. No third-party storage. Direct API calls to Anthropic with nothing in between.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy">
+        <div class="container">
+            <h2>Human-Curated, AI-Enabled</h2>
+            <div class="philosophy-content">
+                <p>
+                    ThinxAI follows the HCAE model: you make decisions, AI executes.
+                    All automation requires explicit approval. Transparency over magic.
                 </p>
+                <div class="principles">
+                    <div class="principle">
+                        <div class="icon">&#129504;</div>
+                        <div class="label">You Decide</div>
+                    </div>
+                    <div class="principle">
+                        <div class="icon">&#128274;</div>
+                        <div class="label">Your Data</div>
+                    </div>
+                    <div class="principle">
+                        <div class="icon">&#128269;</div>
+                        <div class="label">Transparent</div>
+                    </div>
+                    <div class="principle">
+                        <div class="icon">&#9989;</div>
+                        <div class="label">Explicit Approval</div>
+                    </div>
+                </div>
             </div>
-            <a href="https://github.com/jdlongmire/logic-realism-theory" class="card domain-card">
-                <div class="icon">🔬</div>
-                <h3>Logic Realism</h3>
-                <p>L3 Theory — Logic as ontological constraint</p>
-            </a>
-            <a href="https://github.com/jdlongmire/thinx" class="card domain-card">
-                <div class="icon">🧠</div>
-                <h3>ThinxAI Platform</h3>
-                <p>Infrastructure, automation, and integrations</p>
-            </a>
         </div>
+    </section>
 
-        <!-- ============================================ -->
-        <!-- SECTION: INSTALL YOUR OWN                    -->
-        <!-- ============================================ -->
-        <div class="section-title">Set Up Your Own</div>
-        <div class="card" style="text-align: center; padding: 32px;">
-            <div style="font-size: 48px; margin-bottom: 16px;">🚀</div>
-            <h3 style="font-size: 24px; margin-bottom: 12px;">Install ThinxAI</h3>
-            <p style="color: var(--text-muted); margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto;">
-                Deploy your own Claude-powered assistant with Telegram bridge, web chat, and remote server access.
+    <section class="interfaces">
+        <div class="container">
+            <h2>Interface Options</h2>
+            <div class="interface-list">
+                <div class="interface-item">
+                    <div class="name">Terminal</div>
+                    <div class="desc">Claude Code CLI</div>
+                </div>
+                <div class="interface-item">
+                    <div class="name">Telegram</div>
+                    <div class="desc">Mobile access</div>
+                </div>
+                <div class="interface-item">
+                    <div class="name">Web Chat</div>
+                    <div class="desc">Browser interface</div>
+                </div>
+                <div class="interface-item">
+                    <div class="name">Remote Server</div>
+                    <div class="desc">Task spawning</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>
+                <a href="https://github.com/jdlongmire/thinxai.net">GitHub</a> &nbsp;|&nbsp;
+                <a href="https://github.com/jdlongmire/thinxai.net/issues">Issues</a> &nbsp;|&nbsp;
+                MIT License
             </p>
-            <div style="background: #1a1f2e; padding: 16px 24px; border-radius: 8px; display: inline-block; margin-bottom: 16px;">
-                <code style="color: var(--green); font-size: 14px;">curl -fsSL https://thinxai.net/install | bash</code>
-            </div>
-            <p style="font-size: 12px; color: var(--text-muted);">
-                <a href="thinxai-install/README.md" style="color: var(--accent);">View documentation</a> ·
-                <a href="https://github.com/jdlongmire/thinxai.net/tree/main/thinxai-install" style="color: var(--accent);">GitHub source</a>
+            <p style="margin-top: 1rem; font-size: 0.875rem;">
+                Your infrastructure, your control, AI-enabled.
             </p>
         </div>
-
-        <!-- ============================================ -->
-        <!-- SECTION 2: CAPABILITIES & DEVELOPMENT        -->
-        <!-- ============================================ -->
-        <div class="section-title">ThinxAI Capabilities</div>
-        <div class="grid grid-2">
-            <div class="card">
-                <h2>Active Features</h2>
-                <div class="capability">
-                    <div class="capability-icon">💬</div>
-                    <div class="capability-info">
-                        <h4>Telegram Bridge <span class="tag">Live</span></h4>
-                        <p>Natural language routing to Claude CLI</p>
-                    </div>
-                </div>
-                <div class="capability">
-                    <div class="capability-icon">📧</div>
-                    <div class="capability-info">
-                        <h4>Email Integration <span class="tag">Live</span></h4>
-                        <p>Gmail via SMTP/IMAP with NLP commands</p>
-                    </div>
-                </div>
-                <div class="capability">
-                    <div class="capability-icon">🖼️</div>
-                    <div class="capability-info">
-                        <h4>Image Display <span class="tag">Live</span></h4>
-                        <p>View images directly in Telegram</p>
-                    </div>
-                </div>
-                <div class="capability">
-                    <div class="capability-icon">🧠</div>
-                    <div class="capability-info">
-                        <h4>Shared Memory <span class="tag">Live</span></h4>
-                        <p>MEMORY.md context across all interfaces</p>
-                    </div>
-                </div>
-                <div class="capability">
-                    <div class="capability-icon">🐙</div>
-                    <div class="capability-info">
-                        <h4>GitHub CLI <span class="tag">Live</span></h4>
-                        <p>Full repository access and automation</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>In Development</h2>
-                <div class="capability">
-                    <div class="capability-icon">🎙️</div>
-                    <div class="capability-info">
-                        <h4>Voice Transcription <span class="tag dev">Planned</span></h4>
-                        <p>Process voice messages in Telegram</p>
-                    </div>
-                </div>
-                <div class="capability">
-                    <div class="capability-icon">🎨</div>
-                    <div class="capability-info">
-                        <h4>Image Generation <span class="tag dev">Planned</span></h4>
-                        <p>DALL-E integration for visuals</p>
-                    </div>
-                </div>
-                <div class="capability">
-                    <div class="capability-icon">📅</div>
-                    <div class="capability-info">
-                        <h4>Calendar <span class="tag dev">Planned</span></h4>
-                        <p>Google Calendar integration</p>
-                    </div>
-                </div>
-                <div class="capability">
-                    <div class="capability-icon">🌐</div>
-                    <div class="capability-info">
-                        <h4>Web Research <span class="tag dev">Planned</span></h4>
-                        <p>Automated web scraping and summarization</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ============================================ -->
-        <!-- SECTION 3: SYSTEM STATUS                     -->
-        <!-- ============================================ -->
-        <div class="section-title">System Status</div>
-        <div class="status-bar" id="status-bar">
-            <div class="status-item">
-                <div class="status-dot green" id="bridge-status"></div>
-                <span>Telegram Bridge</span>
-            </div>
-            <div class="status-item">
-                <div class="status-dot green" id="claude-status"></div>
-                <span>Claude CLI</span>
-            </div>
-            <div class="status-item">
-                <div class="status-dot green"></div>
-                <span>Email</span>
-            </div>
-            <div class="status-item">
-                <div class="status-dot green"></div>
-                <span>GitHub</span>
-            </div>
-            <div class="status-item">
-                <span class="metric" id="commits-today">--</span>
-                <span>commits today</span>
-            </div>
-            <div class="status-item">
-                <span class="metric" id="uptime-hours">--</span>
-                <span>hrs uptime</span>
-            </div>
-            <span class="updated" id="last-updated">Loading...</span>
-        </div>
-
-        <footer>
-            <p>ThinxAI · Powered by Claude Opus 4.5</p>
-            <p style="margin-top: 8px;">
-                <a href="https://github.com/jdlongmire/thinx">GitHub</a> ·
-                <a href="https://github.com/jdlongmire/oddxian-apologetics/wiki">oddXian Wiki</a> ·
-                <a href="https://oddxian.com">oddxian.com</a>
-            </p>
-        </footer>
-    </div>
-
-    <script>
-        async function loadStatus() {
-            try {
-                const response = await fetch('status.json?' + Date.now());
-                const data = await response.json();
-
-                // Update metrics
-                document.getElementById('commits-today').textContent = data.metrics?.commits_today ?? '--';
-                document.getElementById('uptime-hours').textContent = data.metrics?.uptime_hours ?? '--';
-
-                // Update bridge status
-                const bridgeStatus = data.services?.telegram_bridge?.status;
-                const bridgeDot = document.getElementById('bridge-status');
-                bridgeDot.className = 'status-dot ' + (bridgeStatus === 'online' ? 'green' : 'red');
-
-                // Update timestamp
-                document.getElementById('last-updated').textContent = data.updated || 'Unknown';
-
-            } catch (error) {
-                console.error('Failed to load status:', error);
-                document.getElementById('last-updated').textContent = 'Status unavailable';
-            }
-        }
-
-        loadStatus();
-        setInterval(loadStatus, 5 * 60 * 1000);
-    </script>
+    </footer>
 </body>
 </html>
