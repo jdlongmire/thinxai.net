@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/.claude/hooks/session-init.sh"
+            "command": "/path/to/thinx/.claude/hooks/session-init.sh"
           },
           {
             "type": "prompt",

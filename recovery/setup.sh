@@ -140,12 +140,12 @@ clone_repo() {
 }
 
 # Primary repos
-clone_repo "jdlongmire/thinx" "$REPOS_DIR/thinx"
-clone_repo "jdlongmire/thinx-dashboard" "$REPOS_DIR/thinx-dashboard"
-clone_repo "jdlongmire/AI-Research" "$REPOS_DIR/AI-Research"
-clone_repo "jdlongmire/oddxian-apologetics" "$REPOS_DIR/oddxian-apologetics"
-clone_repo "jdlongmire/logic-realism-theory" "$REPOS_DIR/logic-realism-theory"
-clone_repo "jdlongmire/thinxai.net" "$REPOS_DIR/thinxai.net"
+clone_repo "<your-github-username>/thinx" "$REPOS_DIR/thinx"
+clone_repo "<your-github-username>/thinx-dashboard" "$REPOS_DIR/thinx-dashboard"
+clone_repo "<your-github-username>/AI-Research" "$REPOS_DIR/AI-Research"
+clone_repo "<your-github-username>/oddxian-apologetics" "$REPOS_DIR/oddxian-apologetics"
+clone_repo "<your-github-username>/logic-realism-theory" "$REPOS_DIR/logic-realism-theory"
+clone_repo "<your-github-username>/thinxai.net" "$REPOS_DIR/thinxai.net"
 
 # ============================================
 section "Phase 7: Claude Code Configuration"
@@ -262,8 +262,8 @@ if ! git config --global user.email &> /dev/null; then
     warn "Git user not configured"
     echo ""
     echo "Run:"
-    echo "  git config --global user.name 'JD Longmire'"
-    echo "  git config --global user.email 'longmire.jd@gmail.com'"
+    echo "  git config --global user.name 'Your Name'"
+    echo "  git config --global user.email 'your-email@example.com'"
 else
     log "Git user configured: $(git config --global user.name) <$(git config --global user.email)>"
 fi

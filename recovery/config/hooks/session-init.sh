@@ -4,7 +4,7 @@
 
 set -e
 
-PROJECT_DIR="${CLAUDE_PROJECT_DIR:-/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx}"
+PROJECT_DIR="${CLAUDE_PROJECT_DIR:-/path/to/thinx}"
 META_CONTEXT_DIR="$PROJECT_DIR/memory/meta-context/current"
 VSCODE_LOG="$META_CONTEXT_DIR/vscode-claude.md"
 TELEGRAM_LOG="$META_CONTEXT_DIR/telegram-bridge.md"

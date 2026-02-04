@@ -165,7 +165,7 @@ GMAIL_APP_PASSWORD=<app_password>
 
 **Config file:** `~/.msmtprc`
 
-**Account:** ThinxAI.jdl@gmail.com
+**Account:** Your Gmail address (configured in .env files)
 
 Used by:
 - `health-email.sh` (cron)

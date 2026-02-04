@@ -31,7 +31,7 @@ Complete disaster recovery for ThinxAI environment from a fresh Ubuntu install.
 # Find the drive
 lsblk
 
-# Mount (Ubuntu usually auto-mounts to /media/$USER/Macro-Drive-2TB)
+# Mount (Ubuntu usually auto-mounts to /media/$USER/<drive-name>)
 ```
 
 ### 2. Run Setup Script
@@ -92,7 +92,7 @@ cat > .env << 'EOF'
 TELEGRAM_BOT_TOKEN=your-token
 TELEGRAM_ALLOWED_USER_IDS=your-user-id
 ANTHROPIC_API_KEY=your-key
-GMAIL_ADDRESS=ThinxAI.jdl@gmail.com
+GMAIL_ADDRESS=your-gmail@gmail.com
 GMAIL_APP_PASSWORD=your-app-password
 EOF
 

@@ -4,10 +4,12 @@ After=network.target
 
 [Service]
 Type=simple
-User=jdlongmire
-Group=jdlongmire
-WorkingDirectory=/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-telegram
-Environment=PATH=/home/jdlongmire/.nvm/versions/node/v24.13.0/bin:/usr/local/bin:/usr/bin:/bin:/home/jdlongmire/.local/bin
+User=$USER
+Group=$USER
+# Update WorkingDirectory to your thinxai-telegram location:
+WorkingDirectory=/path/to/thinx/thinxai-telegram
+# Update PATH to include your nvm node and local bin:
+Environment=PATH=/home/$USER/.nvm/versions/node/v24.x.x/bin:/usr/local/bin:/usr/bin:/bin:/home/$USER/.local/bin
 ExecStart=/usr/bin/python3 bridge.py
 Restart=on-failure
 RestartSec=10

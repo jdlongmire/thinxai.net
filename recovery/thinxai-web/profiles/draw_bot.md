@@ -234,7 +234,7 @@ Before delivering a diagram:
 
 A local library of official AWS Architecture Icons (2026 edition) is available for diagrams.
 
-**Location:** `/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/aws-icons/`
+**Location:** `/path/to/thinx/thinxai-web/assets/aws-icons/`
 
 ### Available Icon Categories (1,875 SVGs total)
 
@@ -250,11 +250,11 @@ A local library of official AWS Architecture Icons (2026 edition) is available f
 **For D2 diagrams:** Embed SVGs as icons
 ```d2
 vpc: VPC {
-  icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/aws-icons/Architecture-Group-Icons_07312025/Arch_AWS-Cloud/Arch_Virtual-private-cloud_48.svg
+  icon: /path/to/thinx/thinxai-web/assets/aws-icons/Architecture-Group-Icons_07312025/Arch_AWS-Cloud/Arch_Virtual-private-cloud_48.svg
 
   subnet: Public Subnet {
     ec2: EC2 Instance {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/aws-icons/Architecture-Service-Icons_07312025/Arch_Compute/Arch_Amazon-EC2_48.svg
+      icon: /path/to/thinx/thinxai-web/assets/aws-icons/Architecture-Service-Icons_07312025/Arch_Compute/Arch_Amazon-EC2_48.svg
     }
   }
 }
@@ -304,7 +304,7 @@ assets/aws-icons/Architecture-Group-Icons_07312025/Arch_AWS-Cloud/Arch_Region_48
 
 A local library of icons for enterprise architecture and capability viewpoints is available.
 
-**Location:** `/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/`
+**Location:** `/path/to/thinx/thinxai-web/assets/icons/`
 
 ### Available Collections
 
@@ -356,28 +356,28 @@ enterprise: Enterprise Capabilities {
 
   core: Core Business {
     erp: ERP {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/erp.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/erp.svg
     }
     finance: Finance {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/finance.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/finance.svg
     }
     hr: HR {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/hr.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/hr.svg
     }
   }
 
   operations: Operations {
     scm: Supply Chain {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/scm.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/scm.svg
     }
     manufacturing: Manufacturing {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/manufacturing.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/manufacturing.svg
     }
   }
 
   customer: Customer Facing {
     crm: CRM {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/crm.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/crm.svg
     }
   }
 
@@ -473,65 +473,65 @@ l0: Enterprise Capability Map {
   l1_strategic: Strategic Capabilities {
     style.fill: "#dbeafe"
     analytics: Business Analytics {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/analytics.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/analytics.svg
     }
     pm: Project Management {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/project-management.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/project-management.svg
     }
   }
 
   l1_core: Core Business Capabilities {
     style.fill: "#dcfce7"
     erp: ERP {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/erp.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/erp.svg
     }
     finance: Finance {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/finance.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/finance.svg
     }
     hr: HR {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/hr.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/hr.svg
     }
   }
 
   l1_operations: Operational Capabilities {
     style.fill: "#fef3c7"
     scm: Supply Chain {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/scm.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/scm.svg
     }
     manufacturing: Manufacturing {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/manufacturing.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/manufacturing.svg
     }
     inventory: Inventory {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/inventory.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/inventory.svg
     }
     procurement: Procurement {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/procurement.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/procurement.svg
     }
     quality: Quality {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/quality.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/quality.svg
     }
   }
 
   l1_customer: Customer-Facing Capabilities {
     style.fill: "#fce7f3"
     crm: CRM {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/crm.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/crm.svg
     }
     plm: PLM {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/plm.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/plm.svg
     }
   }
 
   l1_enablers: Enabling Capabilities {
     style.fill: "#e0e7ff"
     security: Security {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/security.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/security.svg
     }
     integration: Integration {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/integration.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/integration.svg
     }
     collaboration: Collaboration {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/collaboration.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/collaboration.svg
     }
   }
 }
@@ -548,24 +548,24 @@ apps: Application Portfolio {
   tier1: Tier 1 - Enterprise {
     style.fill: "#fee2e2"
     erp: SAP S/4HANA {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/erp.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/erp.svg
     }
   }
 
   tier2: Tier 2 - Departmental {
     style.fill: "#fef3c7"
     crm: Salesforce {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/crm.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/crm.svg
     }
     plm: Teamcenter {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/plm.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/plm.svg
     }
   }
 
   tier3: Tier 3 - Utility {
     style.fill: "#dcfce7"
     collab: Microsoft 365 {
-      icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/collaboration.svg
+      icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/collaboration.svg
     }
   }
 
@@ -583,23 +583,23 @@ value_stream: Product Value Stream {
   style.fill: "#f0fdf4"
 
   design: Design {
-    icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/plm.svg
+    icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/plm.svg
   }
 
   source: Source {
-    icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/procurement.svg
+    icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/procurement.svg
   }
 
   make: Make {
-    icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/manufacturing.svg
+    icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/manufacturing.svg
   }
 
   deliver: Deliver {
-    icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/scm.svg
+    icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/scm.svg
   }
 
   service: Service {
-    icon: /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/crm.svg
+    icon: /path/to/thinx/thinxai-web/assets/icons/business-capabilities/crm.svg
   }
 
   design -> source -> make -> deliver -> service
@@ -626,7 +626,7 @@ value_stream: Product Value Stream {
 | Collaboration | `assets/icons/business-capabilities/collaboration.svg` |
 | Integration | `assets/icons/business-capabilities/integration.svg` |
 
-**Full base path:** `/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/assets/icons/business-capabilities/`
+**Full base path:** `/path/to/thinx/thinxai-web/assets/icons/business-capabilities/`
 
 ---
 

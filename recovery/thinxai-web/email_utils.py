@@ -74,10 +74,17 @@ def send_email(to_address: str, subject: str, body: str, html: bool = False) -> 
         }
 
 
-def send_health_status(to_address: str = "longmire.jd@gmail.com") -> dict:
-    """Send a system health status email."""
+def send_health_status(to_address: str = None) -> dict:
+    """Send a system health status email.
+
+    Args:
+        to_address: Recipient email. If not provided, uses GMAIL_ADDRESS from .env
+    """
     import subprocess
     from datetime import datetime
+
+    if to_address is None:
+        to_address = GMAIL_ADDRESS
 
     # Gather system info
     hostname = subprocess.getoutput("hostname")

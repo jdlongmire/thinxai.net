@@ -56,8 +56,8 @@
 
 - **Telegram Bridge:** `bridge.py` (port 18789, localhost + Tailscale)
 - **Web Chat:** `web_chat.py` (port 8088, all interfaces)
-- **Cron Jobs:** User crontab (jdlongmire) - 5 jobs total
-- **Email:** msmtp via ThinxAI.jdl@gmail.com
+- **Cron Jobs:** User crontab ($USER) - 5 jobs total
+- **Email:** msmtp via your Gmail account
 
 ---
 
@@ -220,7 +220,7 @@ claude login
 
 ```bash
 cd /path/to/your/repos   # Replace with your preferred location
-git clone https://github.com/jdlongmire/thinx.git
+git clone https://github.com/<your-username>/thinx.git
 cd thinx
 ```
 
@@ -495,7 +495,7 @@ ls memory/meta-context/current/
 │    tail -f /tmp/bridge.log                                   │
 │                                                              │
 │  FULL RECOVERY                                               │
-│    1. git clone https://github.com/jdlongmire/thinx.git      │
+│    1. git clone https://github.com/<your-username>/thinx.git      │
 │    2. Restore .env credentials                               │
 │    3. pip install -r thinxai-telegram/requirements.txt       │
 │    4. Restore systemd service                                │

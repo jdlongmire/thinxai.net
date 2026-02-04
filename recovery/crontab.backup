@@ -1,14 +1,15 @@
 # ThinxAI Crontab Backup
 # Last Updated: 2026-02-03
-# User: jdlongmire
+# User: $USER (replace with your username)
+# NOTE: Update all paths below to your actual thinx repository location
 
 # ThinxAI Dashboard auto-update - hourly
-0 * * * * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/update-dashboard.sh >> /tmp/dashboard-update.log 2>&1
+0 * * * * /path/to/thinx/scripts/update-dashboard.sh >> /tmp/dashboard-update.log 2>&1
 # ThinxAI Health email - hourly
-30 * * * * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/health-email.sh >> /tmp/health-email.log 2>&1
+30 * * * * /path/to/thinx/scripts/health-email.sh >> /tmp/health-email.log 2>&1
 # Meta-context daily rotation - midnight
-0 0 * * * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/rotate-meta-context.sh >> /tmp/meta-context-rotate.log 2>&1
+0 0 * * * /path/to/thinx/scripts/rotate-meta-context.sh >> /tmp/meta-context-rotate.log 2>&1
 # Meta-context quarterly rollup - 1st of Jan, Apr, Jul, Oct at 1am
-0 1 1 1,4,7,10 * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/rotate-meta-context.sh --quarterly >> /tmp/meta-context-rotate.log 2>&1
+0 1 1 1,4,7,10 * /path/to/thinx/scripts/rotate-meta-context.sh --quarterly >> /tmp/meta-context-rotate.log 2>&1
 # ThinxAI daily backup - 2am
-0 2 * * * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/backup.sh >> /tmp/backup.log 2>&1
+0 2 * * * /path/to/thinx/scripts/backup.sh >> /tmp/backup.log 2>&1
