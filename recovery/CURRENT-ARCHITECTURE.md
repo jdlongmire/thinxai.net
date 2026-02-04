@@ -45,13 +45,13 @@
 
 ### 1. Telegram Bridge (`bridge.py`)
 
-**Location:** `/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-telegram/`
+**Location:** `/path/to/thinx/thinxai-telegram/`
 
 **Purpose:** Routes Telegram messages to Claude CLI, handles email integration.
 
 **Start command:**
 ```bash
-cd /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-telegram
+cd /path/to/thinx/thinxai-telegram
 nohup python3 bridge.py > /tmp/bridge.log 2>&1 &
 ```
 
@@ -72,13 +72,13 @@ GMAIL_APP_PASSWORD=<app_password>
 
 ### 2. Web Chat (`web_chat.py`)
 
-**Location:** `/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web/`
+**Location:** `/path/to/thinx/thinxai-web/`
 
 **Purpose:** Standalone web interface for Claude CLI - no Telegram dependency.
 
 **Start command:**
 ```bash
-cd /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web
+cd /path/to/thinx/thinxai-web
 python3 web_chat.py --host 0.0.0.0 --port 8088
 ```
 
@@ -109,14 +109,14 @@ GMAIL_APP_PASSWORD=<app_password>
 | `0 1 1 1,4,7,10 *` | `rotate-meta-context.sh --quarterly` | `/tmp/meta-context-rotate.log` | Quarterly archive rollup |
 | `0 2 * * *` | `backup.sh` | `/tmp/backup.log` | Daily backup at 2am |
 
-**Scripts location:** `/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/`
+**Scripts location:** `/path/to/thinx/scripts/`
 
 ---
 
 ## Directory Structure
 
 ```
-/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/
+/path/to/thinx/
 ├── CLAUDE.md                    # Agent instructions (session init)
 ├── MEMORY.md                    # Standing context (shared)
 ├── memory/
@@ -191,7 +191,7 @@ Contains tool permissions (Bash, Edit, Read, MCP tools, etc.)
 
 ### Project-Specific
 
-**Location:** `/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/.claude/`
+**Location:** `/path/to/thinx/.claude/`
 
 Contains:
 - hooks/ (session start, etc.)
@@ -219,12 +219,12 @@ crontab -l | grep thinx
 ```bash
 # Telegram bridge
 pkill -f "bridge.py"
-cd /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-telegram
+cd /path/to/thinx/thinxai-telegram
 nohup python3 bridge.py > /tmp/bridge.log 2>&1 &
 
 # Web chat
 pkill -f "web_chat.py"
-cd /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-web
+cd /path/to/thinx/thinxai-web
 nohup python3 web_chat.py --host 0.0.0.0 --port 8088 > /tmp/web_chat.log 2>&1 &
 ```
 

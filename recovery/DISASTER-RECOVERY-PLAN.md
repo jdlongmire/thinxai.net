@@ -115,15 +115,16 @@ Add to crontab for daily backups:
 
 ```bash
 # Daily backup at 2am
-0 2 * * * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/backup.sh
+0 2 * * * /path/to/thinx/scripts/backup.sh
 ```
 
-Create `/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/backup.sh`:
+Create `/path/to/thinx/scripts/backup.sh` (replace with your actual path):
 
 ```bash
 #!/bin/bash
-BACKUP_DIR="/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx-backups/$(date +%Y-%m-%d)"
-THINX_DIR="/media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx"
+# Set THINX_DIR to wherever you cloned the thinx repository
+THINX_DIR="/path/to/thinx"
+BACKUP_DIR="/path/to/thinx-backups/$(date +%Y-%m-%d)"
 
 mkdir -p "$BACKUP_DIR"
 
@@ -134,7 +135,7 @@ cp -r "$THINX_DIR/memory/telegram/" "$BACKUP_DIR/telegram-history/"
 cp -r "$THINX_DIR/memory/meta-context/" "$BACKUP_DIR/meta-context/"
 
 # Keep only last 30 days
-find /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx-backups -maxdepth 1 -type d -mtime +30 -exec rm -rf {} \;
+find "$(dirname "$BACKUP_DIR")" -maxdepth 1 -type d -mtime +30 -exec rm -rf {} \;
 
 echo "Backup completed: $BACKUP_DIR"
 ```
@@ -145,7 +146,7 @@ Save a copy of the service file:
 
 ```bash
 cp /etc/systemd/system/thinxai-telegram.service \
-   /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinx-recovery/thinxai-telegram.service
+   /path/to/thinx/thinx-recovery/thinxai-telegram.service
 ```
 
 ### 3.4 Export Cron Jobs
@@ -153,7 +154,7 @@ cp /etc/systemd/system/thinxai-telegram.service \
 Save crontab for recovery:
 
 ```bash
-crontab -l > /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinx-recovery/crontab.backup
+crontab -l > /path/to/thinx/thinx-recovery/crontab.backup
 ```
 
 ---
@@ -169,7 +170,7 @@ For simple restart after crash or update:
 sudo systemctl stop thinxai-telegram
 
 # Pull latest code
-cd /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx
+cd /path/to/thinx
 git pull
 
 # Restart
@@ -194,7 +195,7 @@ sudo systemctl status thinxai-telegram
 
 **Update .env:**
 ```bash
-nano /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/thinxai-telegram/.env
+nano /path/to/thinx/thinxai-telegram/.env
 ```
 
 ### 4.3 Full System Recovery
@@ -218,7 +219,7 @@ claude login
 #### Phase 2: Clone Repository (2 min)
 
 ```bash
-cd /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos
+cd /path/to/your/repos   # Replace with your preferred location
 git clone https://github.com/jdlongmire/thinx.git
 cd thinx
 ```
@@ -270,16 +271,17 @@ crontab -e
 
 Add these entries:
 ```
+# Replace /path/to/thinx with your actual thinx repository location
 # Dashboard update - hourly
-0 * * * * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/update-dashboard.sh >> /tmp/dashboard-update.log 2>&1
+0 * * * * /path/to/thinx/scripts/update-dashboard.sh >> /tmp/dashboard-update.log 2>&1
 # Health email - hourly at :30
-30 * * * * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/health-email.sh >> /tmp/health-email.log 2>&1
+30 * * * * /path/to/thinx/scripts/health-email.sh >> /tmp/health-email.log 2>&1
 # Meta-context daily rotation - midnight
-0 0 * * * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/rotate-meta-context.sh >> /tmp/meta-context-rotate.log 2>&1
+0 0 * * * /path/to/thinx/scripts/rotate-meta-context.sh >> /tmp/meta-context-rotate.log 2>&1
 # Meta-context quarterly rollup
-0 1 1 1,4,7,10 * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/rotate-meta-context.sh --quarterly >> /tmp/meta-context-rotate.log 2>&1
+0 1 1 1,4,7,10 * /path/to/thinx/scripts/rotate-meta-context.sh --quarterly >> /tmp/meta-context-rotate.log 2>&1
 # Daily backup at 2am
-0 2 * * * /media/jdlongmire/Macro-Drive-2TB/GitHub_Repos/thinx/scripts/backup.sh >> /tmp/backup.log 2>&1
+0 2 * * * /path/to/thinx/scripts/backup.sh >> /tmp/backup.log 2>&1
 ```
 
 #### Phase 8: Restore Conversation History (2 min)
