@@ -1,0 +1,69 @@
+#!/bin/bash
+# ThinxAI Installer Bootstrap
+# This script is served at https://thinxai.net/install
+# Usage: curl -fsSL https://thinxai.net/install | bash
+
+set -e
+
+REPO_URL="https://github.com/jdlongmire/thinxai.net.git"
+INSTALL_SCRIPT_URL="https://raw.githubusercontent.com/jdlongmire/thinxai.net/main/thinxai-install/install.sh"
+
+# Colors
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+echo ""
+echo -e "${CYAN}╔══════════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║                      ThinxAI Installer                           ║${NC}"
+echo -e "${CYAN}╚══════════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+# Check prerequisites
+if ! command -v curl &> /dev/null && ! command -v wget &> /dev/null; then
+    echo "Error: curl or wget required"
+    exit 1
+fi
+
+# Show what will happen
+echo "This will:"
+echo "  1. Download the ThinxAI installer from GitHub"
+echo "  2. Run the interactive setup"
+echo ""
+echo -e "${YELLOW}Review the installer first?${NC}"
+echo "  git clone $REPO_URL"
+echo "  less thinxai.net/thinxai-install/install.sh"
+echo ""
+read -p "Continue with installation? (y/N): " -n 1 -r
+echo ""
+
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Installation cancelled."
+    echo "To install manually:"
+    echo "  git clone $REPO_URL"
+    echo "  cd thinxai.net/thinxai-install"
+    echo "  bash install.sh"
+    exit 0
+fi
+
+# Create temp directory
+TEMP_DIR=$(mktemp -d)
+cd "$TEMP_DIR"
+
+echo ""
+echo -e "${GREEN}Downloading installer...${NC}"
+
+# Download and run
+if command -v curl &> /dev/null; then
+    curl -fsSL "$INSTALL_SCRIPT_URL" -o install.sh
+else
+    wget -q "$INSTALL_SCRIPT_URL" -O install.sh
+fi
+
+chmod +x install.sh
+bash install.sh
+
+# Cleanup
+cd - > /dev/null
+rm -rf "$TEMP_DIR"
