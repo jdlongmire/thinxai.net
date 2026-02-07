@@ -1,0 +1,14 @@
+# Conversation References
+
+This folder stores key conversation excerpts that informed design decisions.
+
+## Naming Convention
+
+`YYYY-MM-DD_topic.md`
+
+## What to Capture
+
+- Architecture discussions
+- Design rationale
+- Requirement clarifications
+- Decision contexts
